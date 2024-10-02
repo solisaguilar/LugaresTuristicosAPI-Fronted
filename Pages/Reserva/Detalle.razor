@@ -1,0 +1,51 @@
+﻿@page "/reserva/detalle/{id:int}"
+
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+@inject ILocalStorageService _localStorageService
+
+<MudText Typo="Typo.h2" Class="ml">Detalles de la Reserva</MudText>
+<MudGrid>
+    <MudItem xs="12" sm="7">
+        <MudPaper Class="pa-4">
+            <EditForm Model="reserva">
+                <DataAnnotationsValidator />
+                <MudCard>
+                    <MudCardContent>
+                        <MudTextField Label="Nombre del Cliente" @bind-Value="reserva.NombreCliente" For="@(() => reserva.NombreCliente)" />
+                        <MudDatePicker Label="Fecha de Reserva" @bind-Date="fechaReserva" />
+                        <MudTextField Label="Lugar" @bind-Value="lugar.Nombre" For="@(() => lugar.Nombre)"></MudTextField>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton Href="@($"/reserva/index")" Variant="Variant.Filled" Color="Color.Info"
+                                   Class="text-center">Regresar</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </EditForm>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+    private Reserva reserva = new Reserva();
+    private Lugar lugar = new Lugar();
+    private DateTime? fechaReserva = DateTime.Today;
+
+    protected override async Task OnInitializedAsync()
+    {
+        httpClient.DefaultRequestHeaders.Authorization =
+            new AuthenticationHeaderValue("Bearer", await _localStorageService.GetItemAsync<string>("token"));
+        await getReserva();
+        fechaReserva = Convert.ToDateTime(reserva.FechaReserva);
+        lugar = reserva.Lugar; 
+    }
+
+    private async Task getReserva()
+    {
+        var resp = await httpClient.GetStringAsync("reservas/" + id);
+        reserva = JsonSerializer.Deserialize<Reserva>(resp, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+    }
+}
+

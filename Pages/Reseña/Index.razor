@@ -1,0 +1,63 @@
+﻿@page "/resena/index"
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+@inject ILocalStorageService _localStorageService
+
+<MudText Typo="Typo.h2" Class="ml">Reseñas</MudText>
+
+<MudTable Items="@resenas" Hover="true" Bordered="true" Striped="true">
+    <ToolBarContent>
+        <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" OnClick="goAdd" />
+        <MudSpacer />
+        @* <MudTextField @bind-Value="searchText" OnKeyUp="searchByComment" Placeholder="Buscar" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField> *@
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Id</MudTh>
+        <MudTh>Comentario</MudTh>
+        <MudTh>FechaResena</MudTh>
+        <MudTh>Lugar</MudTh>
+        <MudTh>Acciones</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Id">@context.Id</MudTd>
+        <MudTd DataLabel="Comentario">@context.Comentario</MudTd>
+        <MudTd DataLabel="FechaResena">@context.FechaResena</MudTd>
+        <MudTd DataLabel="Lugar">@context.Lugar.Nombre</MudTd>
+        <MudTd>
+            <MudButton Href="@($"/reseña/detalle/{context.Id}")" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Info"
+                       Class="text-center">Detalle</MudButton>
+            <MudButton Href="@($"/reseña/editar/{context.Id}")" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Tertiary"
+                       Class="text-center">Editar</MudButton>
+            <MudButton Href="@($"/reseña/eliminar/{context.Id}")" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Warning"
+                       Class="text-center">Eliminar</MudButton>
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>
+
+@code {
+    private IEnumerable<Resena> resenas = new List<Resena>();
+    private string searchText = "";
+    private Resena resena = new Resena();
+
+    protected override async Task OnInitializedAsync()
+    {
+        httpClient.DefaultRequestHeaders.Authorization =
+            new AuthenticationHeaderValue("Bearer", await _localStorageService.GetItemAsync<string>("token"));
+        await getAll();
+    }
+
+    private async Task getAll()
+    {
+        //var httpResponse = await httpClient.GetStringAsync("resena"); // .NET
+        var httpResponse = await httpClient.GetStringAsync("reseñas/lista"); // Java
+        resenas = JsonSerializer.Deserialize<IEnumerable<Resena>>(httpResponse, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+    }
+
+    private void goAdd()
+    {
+        navigationManager.NavigateTo("reseña/agregar");
+    }
+}

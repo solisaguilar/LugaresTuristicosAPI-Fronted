@@ -1,0 +1,92 @@
+﻿@page "/lugar/editar/{id:int}"
+
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+@inject ILocalStorageService _localStorageService
+
+<MudText Typo="Typo.h2" Class="ml">Editar Lugar</MudText>
+<MudGrid>
+    <MudItem xs="12" sm="7">
+        <MudPaper Class="pa-4">
+            <EditForm Model="lugar" OnValidSubmit="OnValidSubmit">
+                <DataAnnotationsValidator />
+                <MudCard>
+                    <MudCardContent>
+                        <MudTextField Label="Nombre" @bind-Value="lugar.Nombre" For="@(() => lugar.Nombre)" />
+                        <MudTextField Label="Descripción" @bind-Value="lugar.Descripcion" For="@(() => lugar.Descripcion)" />
+                        <MudTextField Label="Ubicación" @bind-Value="lugar.Ubicacion" For="@(() => lugar.Ubicacion)" />
+                        <MudSelect Variant="Variant.Outlined" Label="Categoría" AnchorOrigin="Origin.BottomCenter"
+                                   @bind-Value="categoriaSeleccionada">
+                            @foreach (var item in categorias)
+                            {
+                                <MudSelectItem Value="@item.Id">@item.Nombre</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton Href="@($"/lugar/index")" Variant="Variant.Filled" Color="Color.Info"
+                                   Class="text-center">Regresar</MudButton>
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary"
+                                   Class="ml-auto">Guardar cambios</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </EditForm>
+            @if (showLeaveAlert)
+            {
+                <MudAlert Severity="Severity.Error" ContentAlignment="HorizontalAlignment.Center" ShowCloseIcon="true" CloseIconClicked="(() => CloseMe(true))">Ocurrió un problema.</MudAlert>
+            }
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+
+    private IEnumerable<Categoria> categorias = new List<Categoria>();
+    private int categoriaSeleccionada;
+    private bool showLeaveAlert = false;
+    Lugar lugar = new Lugar();
+
+    protected override async Task OnInitializedAsync()
+    {
+        httpClient.DefaultRequestHeaders.Authorization =
+        new AuthenticationHeaderValue("Bearer", await _localStorageService.GetItemAsync<string>("token"));
+        await getCategorias();
+
+        var resp = await httpClient.GetStringAsync("lugares/" + id);
+        lugar = JsonSerializer.Deserialize<Lugar>(resp, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        categoriaSeleccionada = lugar.Categoria.Id;
+    }
+
+    private async Task OnValidSubmit(EditContext context)
+    {
+        await saveChanges();
+    }
+
+    private async Task saveChanges()
+    {
+        lugar.CategoriaId = categoriaSeleccionada;
+        var httpResponse = await httpClient.PutAsJsonAsync<Lugar>("lugares/" + lugar.Id, lugar);
+
+        if (!(httpResponse.StatusCode == System.Net.HttpStatusCode.OK))
+        {
+            showLeaveAlert = true;
+        }
+        else
+        {
+            navigationManager.NavigateTo("lugar/index");
+        }
+    }
+
+    private void CloseMe(bool value)
+    {
+        showLeaveAlert = false;
+    }
+
+    private async Task getCategorias()
+    {
+        var httpResponse = await httpClient.GetStringAsync("categorias/lista");
+        categorias = JsonSerializer.Deserialize<IEnumerable<Categoria>>(httpResponse, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+    }
+}

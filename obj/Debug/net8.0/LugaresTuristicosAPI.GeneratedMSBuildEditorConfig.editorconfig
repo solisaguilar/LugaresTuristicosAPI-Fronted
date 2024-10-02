@@ -1,0 +1,130 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.MudDebugAnalyzer = 
+build_property.MudAllowedAttributePattern = 
+build_property.MudIllegalParameters = 
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = LugaresTuristicosAPI
+build_property.RootNamespace = LugaresTuristicosAPI
+build_property.ProjectDir = C:\Users\MINEDUCYT\Desktop\LugaresTuristicosAPI\LugaresTuristicosAPI\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = false
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\MINEDUCYT\Desktop\LugaresTuristicosAPI\LugaresTuristicosAPI
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/Layout/LoginLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XExvZ2luTGF5b3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/Pages/Categoria/Agregar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0ZWdvcmlhXEFncmVnYXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/Pages/Categoria/Eliminar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0ZWdvcmlhXEVsaW1pbmFyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/Pages/Categoria/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0ZWdvcmlhXEluZGV4LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/Pages/Categoria/Modificar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0ZWdvcmlhXE1vZGlmaWNhci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/Pages/lugar/Agregar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcbHVnYXJcQWdyZWdhci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/Pages/lugar/Detalle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcbHVnYXJcRGV0YWxsZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/Pages/lugar/Eliminar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcbHVnYXJcRWxpbWluYXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/Pages/lugar/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcbHVnYXJcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/Pages/lugar/Modificar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcbHVnYXJcTW9kaWZpY2FyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/Pages/Reserva/Agregar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVzZXJ2YVxBZ3JlZ2FyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/Pages/Reserva/Detalle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVzZXJ2YVxEZXRhbGxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/Pages/Reserva/Eliminar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVzZXJ2YVxFbGltaW5hci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/Pages/Reserva/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVzZXJ2YVxJbmRleC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/Pages/Reserva/Modificar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVzZXJ2YVxNb2RpZmljYXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/Pages/Reseña/Agregar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVzZcOxYVxBZ3JlZ2FyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/Pages/Reseña/Detalle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVzZcOxYVxEZXRhbGxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/Pages/Reseña/Eliminar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVzZcOxYVxFbGltaW5hci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/Pages/Reseña/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVzZcOxYVxJbmRleC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/Pages/Reseña/Modificar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVzZcOxYVxNb2RpZmljYXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-4idad4kkzo
+
+[C:/Users/MINEDUCYT/Desktop/LugaresTuristicosAPI/LugaresTuristicosAPI/Layout/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-8ca78qwral

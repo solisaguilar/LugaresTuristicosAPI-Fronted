@@ -1,0 +1,77 @@
+﻿@page "/resena/eliminar/{id:int}"
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+@inject ILocalStorageService _localStorageService
+
+<MudText Typo="Typo.h2" Class="ml">Eliminar Reseña</MudText>
+
+<MudGrid>
+    <MudItem xs="12" sm="7">
+        <MudPaper Class="pa-4">
+            <EditForm Model="resena" OnValidSubmit="OnValidSubmit">
+                <DataAnnotationsValidator />
+                <MudCard>
+                    <MudCardContent>
+                        <MudTextField Label="Comentario" @bind-Value="resena.Comentario" For="@(() => resena.Comentario)" />
+                        <MudDatePicker Label="Fecha de Reseña" @bind-Date="fechaResena" />
+                        <MudTextField Label="Lugar" @bind-Value="lugar.Nombre" For="@(() => lugar.Nombre)"></MudTextField>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton Href="@($"/resena/index")" Variant="Variant.Filled" Color="Color.Info"
+                                   Class="text-center">Regresar</MudButton>
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Error"
+                                   Class="ml-auto">Eliminar</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </EditForm>
+            @if (showLeaveAlert)
+            {
+                <MudAlert Severity="Severity.Error" ContentAlignment="HorizontalAlignment.Center" ShowCloseIcon="true" CloseIconClicked="(() => CloseMe(true))">Ocurrió un problema.</MudAlert>
+            }
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+
+    private Resena resena = new Resena();
+    private Lugar lugar = new Lugar();
+    private DateTime? fechaResena = DateTime.Today;
+    private bool showLeaveAlert = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        httpClient.DefaultRequestHeaders.Authorization =
+            new AuthenticationHeaderValue("Bearer", await _localStorageService.GetItemAsync<string>("token"));
+
+        var resp = await httpClient.GetStringAsync("reseñas/" + id);
+        resena = JsonSerializer.Deserialize<Resena>(resp, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        lugar = resena.Lugar;
+    }
+
+    private async Task OnValidSubmit(EditContext context)
+    {
+        await eliminar();
+    }
+
+    private async Task eliminar()
+    {
+        var httpResponse = await httpClient.DeleteAsync("resenas/" + resena.Id);
+
+        if (!(httpResponse.StatusCode == System.Net.HttpStatusCode.OK))
+        {
+            showLeaveAlert = true;
+        }
+        else
+        {
+            navigationManager.NavigateTo("resena/index");
+        }
+    }
+
+    private void CloseMe(bool value)
+    {
+        showLeaveAlert = false;
+    }
+}

@@ -1,0 +1,62 @@
+﻿@page "/reserva/index"
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+@inject ILocalStorageService _localStorageService
+
+<MudText Typo="Typo.h2" Class="ml">Reservas</MudText>
+
+<MudTable Items="@reservas" Hover="true" Bordered="true" Striped="true">
+    <ToolBarContent>
+        <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" OnClick="goAdd" />
+        <MudSpacer />
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Id</MudTh>
+        <MudTh>FechaReserva</MudTh>
+        <MudTh>NombreCliente</MudTh>
+        <MudTh>Lugar</MudTh>
+        <MudTh>Acciones</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Id">@context.Id</MudTd>
+        <MudTd DataLabel="FechaReserva">@context.FechaReserva</MudTd>
+        <MudTd DataLabel="NombreCliente">@context.NombreCliente</MudTd>
+        <MudTd DataLabel="Lugar">@context.Lugar.Nombre</MudTd>
+        <MudTd>
+            <MudButton Href="@($"/reserva/detalle/{context.Id}")" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Info"
+                       Class="text-center">Detalle</MudButton>
+            <MudButton Href="@($"/reserva/editar/{context.Id}")" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Tertiary"
+                       Class="text-center">Editar</MudButton>
+            <MudButton Href="@($"/reserva/eliminar/{context.Id}")" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Warning"
+                       Class="text-center">Eliminar</MudButton>
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>
+
+@code {
+    private IEnumerable<Reserva> reservas = new List<Reserva>();
+    private string searchText = "";
+    private Reserva reserva = new Reserva();
+
+    protected override async Task OnInitializedAsync()
+    {
+        httpClient.DefaultRequestHeaders.Authorization =
+            new AuthenticationHeaderValue("Bearer", await _localStorageService.GetItemAsync<string>("token"));
+        await getAll();
+    }
+
+    private async Task getAll()
+    {
+        //var httpResponse = await httpClient.GetStringAsync("reserva"); // .NET
+        var httpResponse = await httpClient.GetStringAsync("reservas/lista"); // Java
+        reservas = JsonSerializer.Deserialize<IEnumerable<Reserva>>(httpResponse, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+    }
+
+    private void goAdd()
+    {
+        navigationManager.NavigateTo("reserva/agregar");
+    }
+}

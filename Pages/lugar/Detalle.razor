@@ -1,0 +1,51 @@
+﻿@page "/lugar/detalle/{id:int}"
+
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+@inject ILocalStorageService _localStorageService
+
+<MudText Typo="Typo.h2" Class="ml">Detalles del Lugar</MudText>
+<MudGrid>
+    <MudItem xs="12" sm="7">
+        <MudPaper Class="pa-4">
+            <EditForm Model="lugar">
+                <DataAnnotationsValidator />
+                <MudCard>
+                    <MudCardContent>
+                        <MudTextField Label="Nombre" @bind-Value="lugar.Nombre" For="@(() => lugar.Nombre)" />
+                        <MudTextField Label="Descripción" @bind-Value="lugar.Descripcion" For="@(() => lugar.Descripcion)" />
+                        <MudTextField Label="Ubicación" @bind-Value="lugar.Ubicacion" For="@(() => lugar.Ubicacion)" />
+                        <MudTextField Label="Categoría" @bind-Value="categoria.Nombre" For="@(() => categoria.Nombre)"></MudTextField>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton Href="@($"/lugar/index")" Variant="Variant.Filled" Color="Color.Info"
+                                   Class="text-center">Regresar</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </EditForm>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+    private Lugar lugar = new Lugar();
+    private Categoria categoria = new Categoria();
+
+    protected override async Task OnInitializedAsync()
+    {
+        httpClient.DefaultRequestHeaders.Authorization =
+            new AuthenticationHeaderValue("Bearer", await _localStorageService.GetItemAsync<string>("token"));
+        await getLugar();
+        categoria = lugar.Categoria;
+    }
+
+    private async Task getLugar()
+    {
+        var resp = await httpClient.GetStringAsync("lugares/" + id);
+        lugar = JsonSerializer.Deserialize<Lugar>(resp, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+    }
+}
+
